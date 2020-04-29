@@ -1,5 +1,4 @@
 var courseResourceApi = MAIN_BACKEND_LOCATION+'/api/v1/coursepage/';
-var vacancyUrl = MAIN_BACKEND_LOCATION+'/a/vacancies/index.html?code=';
 
 app.controller('registerCourseController', function (notice, $scope, $http, $location, $route) {
 
@@ -121,17 +120,6 @@ app.controller('listCourseController', function(notice, $scope, $http,
 
 		});
 	}
-
-	 $scope.openCoursePage = function(coursePageCode) {
-	 //$scope.setOnline=;
-//	 console.log("dafsdfsfd");
-	 $window.open(vacancyUrl+coursePageCode,'_blank');
-//	 $window.open('/index/:code'+coursePageCode,'_blank');
-//	 $window.open('/centauri.be/api/v1/coursepage/addBodyText/MIGEN01','_blank');
-//	 $window.open("/update-course/" + coursePageCode,'_blank');
-	 console.log(coursePageCode);
-	 console.log("sono fuori ");
-	 }
 
 });
 
