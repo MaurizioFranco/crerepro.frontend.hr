@@ -59,12 +59,12 @@ app.config(function($routeProvider) {
 //	}).when('/list-all-books-to-download', {
 //		templateUrl : './template/book/listb.html',
 //		controller : 'listBookController'
-//	}).when('/list-all-courses', {
-//		templateUrl : './template/course/list.html',
-//		controller : 'listCourseController'
-//	}).when('/register-new-course', {
-//		templateUrl : './template/course/new.html',
-//		controller : 'registerCourseController'
+	}).when('/list-all-courses', {
+		templateUrl : './template/course/list.html',
+		controller : 'listCourseController'
+	}).when('/register-new-course', {
+		templateUrl : './template/course/new.html',
+		controller : 'registerCourseController'
 //	}).when('/statistiche/:code', {
 //		templateUrl : './template/statistics2.html',
 //		controller : 'statisticsController'
@@ -83,16 +83,16 @@ app.config(function($routeProvider) {
 //		templateUrl : './template/noteTemplate/update.html',
 //		controller : 'noteEditController'
 
-	}).when('/list-all-message', {
-		//		newsLetterMessage
-		templateUrl : './template/newsLetterMessage/list.html',
-		controller : 'listMessageController'
-	}).when('/register-new-message', {
-		templateUrl : './template/newsLetterMessage/new.html',
-		controller : 'registerMessageController'
-	}).when('/update-message/:id', {
-		templateUrl : './template/newsLetterMessage/update.html',
-		controller : 'messageEditController'
+//	}).when('/list-all-message', {
+//		//		newsLetterMessage
+//		templateUrl : './template/newsLetterMessage/list.html',
+//		controller : 'listMessageController'
+//	}).when('/register-new-message', {
+//		templateUrl : './template/newsLetterMessage/new.html',
+//		controller : 'registerMessageController'
+//	}).when('/update-message/:id', {
+//		templateUrl : './template/newsLetterMessage/update.html',
+//		controller : 'messageEditController'
 	}).when('/list-all-interviewreplies', {
 		templateUrl : './template/interview/interview.html',
 		controller : 'interviewController'
