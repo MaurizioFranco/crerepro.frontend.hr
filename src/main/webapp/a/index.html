@@ -149,69 +149,7 @@
 
 									
 						</ul></li>	
-						<li class="has-sub"><a href="#/list-all-usersurveytoken">
-								<i class="fas fa-list-ul"></i> <span>Questionari</span>
-						</a></li>
-						<!-- 						<li class="has-sub"><a href="#/list-all-interviewreplies"> -->
-						<!-- 								<i class="fas fa-list-ul"></i> <span>Interviste</span> -->
-						<!-- 						</a></li> -->
-
-						<!-- 						<li class="has-sub"><a href="#home"> <i -->
-						<!-- 								class="far fa-chart-bar"></i> <span>Statistiche</span> -->
-						<!-- 						</a></li> -->
-						<li class="has-sub"><a href="#home"> <i
-								class="fas fa-address-book"></i> <span>Statistiche</span>
-						</a>
-							<ul class="sub-menu">
-								<li class="has-sub" ng-repeat="current in codes"><a
-									ng-href="#statistiche/{{current.code}}"> <span>{{current.code}}</span>
-								</a></li>
-							</ul>
-						<li class="has-sub expand"><a href="javascript:;"> <b
-								class="caret"></b> <i class="fas fa-address-card"></i> <span>Consulenti
-									IT</span>
-						</a>
-							<ul class="sub-menu" style="display: none;">
-
-								<li class="has-sub"><a href="#/list-all-itconsultants">
-										<span>Lista Consulenti IT</span>
-								</a></li>
-
-
-								<li class="has-sub"><a href="#/register-new-itconsultant">
-										<span>Nuovo Consulente IT</span>
-								</a></li>
-								<li class="has-sub"><a
-									href="#/register-newSmart-itconsultant"> <span>Nuovo
-											Consulente IT Smart</span>
-								</a></li>
-							
-	                     <li class="has-sub"><a href="#/statistics-itconsultant">
-										<span>Statistica Consulenti IT</span>
-								</a></li>
-								  <li class="has-sub"><a href="#/statistics-itconsultant2">
-										<span>Statistica Consulenti IT2</span>
-								</a></li>
-							</ul></li>
-
-						<li class="has-sub expand"><a href="javascript:;"> <b
-								class="caret"></b> <i class="fa fa-book"></i> <span>Libri</span>
-						</a>
-							<ul class="sub-menu" style="display: none;">
-
-								<li class="has-sub"><a href="#/list-all-books"> <span>Lista
-											Libri</span>
-								</a></li>
-
-
-								<li class="has-sub"><a href="#/register-new-book"><span>Nuovo
-											Libro</span> </a></li>
-
-								<li class="has-sub"><a href="#/list-all-books-to-download">
-										<span>Libri da scaricare</span> <i class="fa fa-download"></i>
-								</a></li>
-
-							</ul></li>
+						
 
 						<li class="has-sub expand"><a href="javascript:;"> <b
 								class="caret"></b> <i class="fas fa-file"></i> <span>Corsi</span>
@@ -381,6 +319,7 @@
 	<script src="./js/candidate/registerCandidateController.js"></script>
 	<script src="./js/candidate/listCandidateController.js"></script>
 	<script src="./js/candidate/detailCandidateController.js"></script>
+	<script src="./js/courseController.js"></script>
 	<script src="./js/itConsultantControllers.js"></script>
 	<script src="./js/userSurveyTokenController.js"></script>
 	<script src="./js/statisticsController.js"></script>
