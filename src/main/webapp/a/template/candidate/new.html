@@ -26,7 +26,7 @@
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="courseCode" readonly>CODICE</label>
                         <div class="col-md-7">
-                        <select name="courseCode" ng-model="course" required>
+                        <select name="courseCode" ng-model="course">
                         	<option  default disabled selected >{{course}}</option>
 							<option  ng-hide="course == current.code" value={{current.code}} ng-repeat="current in codes">{{current.code}}</option>
 						</select>

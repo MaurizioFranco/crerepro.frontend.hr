@@ -59,7 +59,7 @@
 									<th>Cognome</th>
 									
 									<th>CV</th>
-									
+									<th>inserito da</th>
 									<th width="100"></th>
 									<th width="100"></th>
 								</tr>
@@ -67,25 +67,17 @@
 							<tbody>
 							<tr ng-repeat="current in list | filter:search"
 									class="gradeX odd" role="row">
-<!-- 									<td>{{current.candidateStatusColor}}</td> -->
 									<td style="height: 5%; width: 5%; background-color: {{current.candidateStatusColor}}"></td>
-<!-- 									<td><div style="height: 10px; width: 100px; background-color: {{current.candidateStatusColor}}"></div></td> -->
-<!-- 								<td class="f-s-600 text-inverse sorting_1" tabindex="0" -->
-<!-- 										width="1%">1</td> -->
 									<td><img id='imgUser' src='{{imgFullPath + current.imgpath}}'
-										alt='' height='42' width='42'></td>
-									
-<!-- 									<td>{{current.candidateStatesId}}</td> -->
+										alt='' height='42' width='42' ng-show="current.imgpath != null"></td>
 									<td>{{current.email}}</td>
 									<td>{{current.firstname}}</td>
 									<td>{{current.lastname}}</td>
-									
-<!-- 									<td>{{current.cvExternalPath}}</td> -->
-									
 								<td><a href="{{cvFullPath + current.cvExternalPath}}" ng-if="current.cvExternalPath != null" target="_blank" download>
 						 				<i class="fa fa-download" ></i>
 						 				</a>
 									</td> 
+									<td>{{current.insertedByFirstname}}</td>
 									<td>
 										<button type="button"
 											ng-click="editCandidateCustom(current.id)"

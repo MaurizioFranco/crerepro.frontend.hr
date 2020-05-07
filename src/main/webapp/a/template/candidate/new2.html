@@ -1,0 +1,91 @@
+<div class="container content">
+    <div class="panel">
+        <div class="panel-heading">
+            <h1 class="panel-title">Inserisci nuovo Candidato</h1>
+        </div>
+        <div class="panel-body ">
+            <div class="container">
+                <form class="form-horizontal" ng-class="{'submitted': submitted}" ng-submit="save()">
+
+                    <div class="form-group col-md-12">
+                        <label   class="col-md-2 control-lable" for="firstname">Nome</label>
+                        <div class="col-md-7">
+                            <input   type="text"  name="firstname" ng-model="myForm.firstname" class="form-control input-sm" placeholder="Inserisci nome"
+                               pattern="[A-Za-zÀ-ÿ ]{1,50}" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="lastname">Cognome</label>
+                        <div class="col-md-7">
+                            <input   type="text" name="lastname"  ng-model="myForm.lastname" class="form-control input-sm " placeholder="Inserisci cognome"
+                                 pattern="[A-Za-zÀ-ÿ ]{1,50}" required/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="courseCode" readonly>CODICE</label>
+                        <div class="col-md-7">
+                        <select name="courseCode" ng-model="course">
+                        	<option  default disabled selected >{{course}}</option>
+							<option  ng-hide="course == current.code" value={{current.code}} ng-repeat="current in codes">{{current.code}}</option>
+						</select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="email">E-Mail</label>
+                        <div class="col-md-7">
+                            <input type="text" name="email" ng-model="myForm.email" required class="form-control input-sm" placeholder="Inserisci email" 
+                            maxlength="100" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                            />
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group col-md-12 form-inline">
+                        <label class="col-md-2 control-lable" for="imgpath">Immagine Profilo <img src="./img/info.png" width="25" height="25"
+                                border="6" title="Formati: .jpg, .jpeg, .png Dimesione massima: 5MB" data-toggle="tooltip">
+                        </label>
+                    
+                        <div class="col-md-7 form-inline">
+                            <input type="file" file-model="myForm.files[0]" class="form-control input-sm" accept=".jpg, .jpeg, .png" onchange="loadFile(event)" 
+                            />
+                            <img id="output" width="60" height="60" border="0" style="padding: 10px; float: right;" />
+
+                        </div>
+                    </div>
+                    <script>
+                        var loadFile = function (event) {
+                            var output = document.getElementById('output');
+                            output.src = URL
+                                .createObjectURL(event.target.files[0]);
+                            console.log("output.src : " + output.src);
+                        };
+                    </script>
+
+                    <div class="form-group col-md-12 form-inline">
+                        <label class="col-md-2 control-lable" for="cvExternalPath">Curriculum Vitae <img src="./img/info.png" width="25" height="25"
+                                border="6" title="Formati: .docx, .pdf, .doc Dimesione massima: 5MB" data-toggle="tooltip"> </label>
+                        <div class="col-md-7">
+                            <input type="file" file-model="myForm.files[1]" class="form-control input-sm" accept=".docx, .pdf, .doc" />
+                        </div>
+
+                    </div>
+                    
+                        <br><br>
+                    
+                    <div align="center">
+
+                        <!-- <input type="submit" value="Register User" class="btn btn-primary btn-sm"> -->                     
+							 <button type="submit" class="btn btn-default" ng-click="submitted= true;submitUserForm()">Inserisci</button>
+<!--                         <button type="button" ng-click="resetForm()" class="btn btn-warning btn-sm">Cancella</button> -->
+                        <!-- <input type="hidden" name="id" id="idCandidate" value=""> -->
+                        <a href="#/list-all-candidates" type="button" class="btn btn-danger btn-sm">Indietro</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

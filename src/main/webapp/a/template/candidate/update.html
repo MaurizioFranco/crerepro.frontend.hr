@@ -55,27 +55,7 @@
 								ng-model="candidateCustom.domicileCity"
 								class="form-control input-sm" placeholder="Inserisci citta' del domicilio" maxlength="100" />
 						</div>
-					</div>
-
-					<div class="form-group col-md-12">
-						<label class="col-md-2 control-lable" for="domicileStreetName">Via</label>
-						<div class="col-md-7">
-							<input type="text" name="email"
-								ng-model="candidateCustom.domicileStreetName"
-								class="form-control input-sm"
-								placeholder="Inserisci via del domicilio" maxlength="100"/>
-						</div>
-					</div>
-
-					<div class="form-group col-md-12">
-						<label class="col-md-2 control-lable" for="domicileHouseNumber">Numero Civico</label>
-						<div class="col-md-7">
-							<input type="number" name="domicileHouseNumber"
-								ng-model="candidateCustom.domicileHouseNumber"
-								class="form-control input-sm"
-								placeholder="Inserisci numero civico" maxlength="10"/>
-						</div>
-					</div>
+					</div>					
 
 					<div class="form-group col-md-12">
 						<label class="col-md-2 control-lable" for="studyQualification">Titolo
@@ -125,21 +105,11 @@
 								ng-checked="{{candidateCustom.stillHighStudy}}" />
 						</div>
 					</div>
-
-					<hr>
-					   <div class="form-group col-md-12">
-                        <label class="col-md-2 control-lable" for="candidateNote" readonly>ETICHETTA</label>
-                        	<div class="col-md-7">
-                        		<select name="originSite" ng-model="myForm.site"  style="width:350px">
-									<option  value={{current.description}} ng-repeat="current in site">{{current.label}}</option>
-							</select> 
-                        	</div>
-                        </div>
                     
                     <hr>
                     
                         <div class="form-group col-md-12">
-                        <label class="col-md-2 control-lable" for="candidateStatesId" readonly>Candidate State</label>
+                        <label class="col-md-2 control-lable" for="candidateStatesId" readonly>Stato della candidatura:</label>
                         	<div class="col-md-7">
 								<select ng-options="current as current.statusLabel for current in states track by current.id" ng-model="selected" style="background-color:{{selected.statusColor}}"></select>
                         	</div>
@@ -200,10 +170,7 @@
 						<!-- 					<button type="button" ng-click="resetForm()" -->
 						<!-- 						class="btn btn-warning btn-sm">Reset Form</button> -->
 						<a href="#/list-all-candidates" type="button"
-							class="btn btn-danger btn-sm">Indietro</a> 
-							<input type="hidden" name="id" id="userId"
-							ng-model="candidateCustom.userId"
-							value="{{candidateCustom.userId}}"> 
+							class="btn btn-danger btn-sm">Indietro</a> 							
 							<input type="hidden"
 							name="oldImg" id="oldImg" ng-model="candidateCustom.oldImg"
 							value="{{candidateCustom.imgpath}}"> 
