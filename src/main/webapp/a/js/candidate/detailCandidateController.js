@@ -1,76 +1,52 @@
 app.controller('detailCandidateController', function (notice, $scope, $http, $location, $routeParams, $route) {
-    var getImg = "";
-    var getCV = "";
+	let debugEnabled = true ;
+    let oldImgProfilePath = "";
+    let oldCVPath = "";
     $scope.uploadResult = "";
-    var stringMessage = "";
-    var getCandState = "";
+    let stringMessage = "";
+    let getCandState = "";
     
-    //var currentStateSelected = "" ;
-  
-    //Chiamata Rest per i candidateStates
      $http({
 		method:'GET',
 		url:candidateStatesApi
 	}).then(function(response){	
+		
 		$scope.states=(response.data);
-		console.log("x1 - $scope.candidateCustom.candidateStatesId: "+ $scope.candidateCustom.candidateStatesId);
-		if (($scope.candidateCustom.candidateStatesId!=undefined)&&($scope.candidateCustom.candidateStatesId!=null)) {
-			console.log("x2 - $scope.candidateCustom.candidateStatesId: "+ $scope.candidateCustom.candidateStatesId);	
-			for (var i=0; i<$scope.states.length;i++) {
-	        	if ($scope.candidateCustom.candidateStatesId==$scope.states[i].id){
-	        		$scope.selected = $scope.states[i];	
-	        		console.log("x3 - $scope.states[i]: "+ $scope.states[i] + " - with i: " + i);
-	        	}
-	        }
-//	        console.log("x6 - currentStateSelected.id: "+ currentStateSelected.id);
-//			$scope.selected = $scope.states[5]; 
-		}
-		console.log("States Controllo Seba Start-----------------");
+		debugMessage("Lista candidate states...");
+		debugMessage($scope.states);
+		initializeSelectedStatusCode();
 	},function(errResponse) {
-		console.log(errResponse.data);
-		console.log("() end");
+		debugMessage(errResponse.data);
 	});
-    //end della chiamata Rest per i candidateStates
     
-    console.log("detailCandidateController invoke")
     $scope.candidateCustomId = $routeParams.id;
-    
-    
-    
     $http({
         method: 'GET',
         url: candidateResourceApi2 + $scope.candidateCustomId
     }).then(function (response) {
         $scope.candidateCustom = response.data;
-        getImg = $scope.candidateCustom.imgpath;
-        getCV = $scope.candidateCustom.cvExternalPath;
+        debugMessage("Caricato dettaglio del candidato:");
+		debugMessage($scope.candidateCustom);
+        oldImgProfilePath = $scope.candidateCustom.imgpath;
+        oldCVPath = $scope.candidateCustom.cvExternalPath;
         getCandState = $scope.candidateCustom.id;
-        console.log("x4 - $scope.candidateCustom.candidateStatesId: "+ $scope.candidateCustom.candidateStatesId);
-		if (($scope.candidateCustom.candidateStatesId!=undefined)&&($scope.candidateCustom.candidateStatesId!=null)) {
-			console.log("x5 - $scope.candidateCustom.candidateStatesId: "+ $scope.candidateCustom.candidateStatesId);	
-			for (var i=0; i<$scope.states.length;i++) {
-	        	if ($scope.candidateCustom.candidateStatesId==$scope.states[i].id){
-	        		$scope.selected = $scope.states[i];	
-	        		console.log("x6 - $scope.states[i]: "+ $scope.states[i] + " - with i: " + i);
-	        	}
-	        }
-//	        console.log("x6 - currentStateSelected.id: "+ currentStateSelected.id);
-//			$scope.selected = $scope.states[5]; 
-		}
-        console.log("BEGIN : Stampa di verifica candidateCustom:-------------------------------------");
-        console.log($scope.candidateCustom);
-        console.log("END   : Stampa di verifica candidateCustom:-------------------------------------");
-        
-        console.log("detailCandidateController - candidateCustom: "+$scope.candidateCustom);
-        //seba controlli
+        initializeSelectedStatusCode();
         
     });
+    
+    function initializeSelectedStatusCode () {
+    	if (($scope.candidateCustom.candidateStatusCode!=undefined)&&($scope.candidateCustom.candidateStatusCode!=null)) {
+    		for (let i=0; i<$scope.states.length;i++) {
+    			if ($scope.candidateCustom.candidateStatusCode==$scope.states[i].id){
+    				$scope.selected = $scope.states[i];	
+    			}
+    		}
+    	}    	
+    }
+    
     //$scope.selected = currentStateSelected;
     $scope.candidateCustom = {
-        userId: "",
         domicileCity: "",
-        domicileStreetName: "",
-        domicileHouseNumber: "",
         studyQualification: "",
         graduate: "",
         highGraduate: "",
@@ -86,12 +62,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
         oldImg: null,
         oldCV: null,
         oldCandStat:null,
-//        currentStateSelected:currentStateSelected,
-        candidateStatesId:null,
-        //add by Seba campo buono
-        candidateStatusColor:"",
-        //add by Seba
-
+        candidateStatusCode:null,
         files: []
     
     	
@@ -99,23 +70,13 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
 
     $scope.submitUserForm = function () {
 
-        console.log("getImg " + getImg);
-        console.log("getCV " + getCV);
+        debugMessage("oldImgProfilePath " + oldImgProfilePath);
+        debugMessage("oldCVPath " + oldCVPath);
         if ($scope.validateForm()) {
-            var data = new FormData();
-            
-            data
-                .append("userId",
-                    $scope.candidateCustom.userId);
-            console.log("$scope.candidateCustom.userId " +
-                $scope.candidateCustom.userId);
+            let data = new FormData();
 
             data.append("domicileCity",
                 $scope.candidateCustom.domicileCity);
-            data.append("domicileStreetName",
-                $scope.candidateCustom.domicileStreetName);
-            data.append("domicileHouseNumber",
-                $scope.candidateCustom.domicileHouseNumber);
             data.append("studyQualification",
                 $scope.candidateCustom.studyQualification);
 
@@ -124,7 +85,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
             } else {
                 data.append("graduate",
                     $scope.candidateCustom.graduate);
-                console.log("graduate" +
+                debugMessage("graduate" +
                     $scope.candidateCustom.graduate);
             }
 
@@ -133,7 +94,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
             } else {
                 data.append("highGraduate",
                     $scope.candidateCustom.highGraduate);
-                console.log("highGraduate" +
+                debugMessage("highGraduate" +
                     $scope.candidateCustom.highGraduate);
             }
 
@@ -157,47 +118,42 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
             data.append("note",
                     $scope.candidateCustom.note);
 
-            console.log("$scope.candidateCustom.dateOfBirth " +
+            debugMessage("$scope.candidateCustom.dateOfBirth " +
                 $scope.candidateCustom.dateOfBirth); // old
             // dateOfBirth
-            console.log("$scope.dateOfBirth : " +
+            debugMessage("$scope.dateOfBirth : " +
                 $scope.dateOfBirth); // new dateOfBirth
 
             if ($scope.dateOfBirth == null) {
 
-                // var inputDate =
+                // let inputDate =
                 // $scope.candidateCustom.dateOfBirth;
-                // var d = new Date(inputDate);
-                // console.log("inputDate " + d);
+                // let d = new Date(inputDate);
+                // debugMessage("inputDate " + d);
                 // data.append("dateOfBirth", d);
             } else {
 
-                var inputDate = $scope.dateOfBirth;
-                var d = new Date(inputDate);
-                console.log("inputDate " + d);
+                let inputDate = $scope.dateOfBirth;
+                let d = new Date(inputDate);
+                debugMessage("inputDate " + d);
                 data.append("dateOfBirth", d);
             }
 
-            data.append("oldImg", getImg);
-            data.append("oldCV", getCV);
-            //add by Seba
+            data.append("oldImg", oldImgProfilePath);
+            data.append("oldCV", oldCVPath);
             data.append("oldCandStat", getCandState);
-            //add by Seba
-//            data.append("candidateStatusColor",myForm.states);
 
-            console.log("oldImg " + getImg);
-            console.log("oldCV " + getCV);
-//            console.log("candidateStatesId: " + $scope.candidateCustom.candidateStatesId);
-            console.log("XXXXXX $scope.candidateCustom.candidateStatesId" + $scope.candidateCustom.candidateStatesId + "$scope.selected " + $scope.selected);
-            console.log($scope.selected);
-//            console.log(JSON.stringify($scope.selected));
-//            console.log("currentStateSelected: " + currentStateSelected);
-            //console.log("currentStateSelected.id: "+ currentStateSelected.id);
-//            data.append("candidateStatesId", $scope.candidateCustom.candidateStatesId);
-            data.append("candidateStatesId", $scope.selected.id);
-            console.log("$scope.candidateCustom.files" +
+            debugMessage("oldImgProfilePath: " + oldImgProfilePath);
+            debugMessage("oldCV " + oldCVPath);
+            debugMessage("XXXXXX $scope.candidateCustom.candidateStatusCode" + $scope.candidateCustom.candidateStatusCode + "$scope.selected " + $scope.selected);
+            debugMessage($scope.selected);
+//            debugMessage(JSON.stringify($scope.selected));
+//            debugMessage("currentStateSelected: " + currentStateSelected);
+            //debugMessage("currentStateSelected.id: "+ currentStateSelected.id);
+            data.append("candidateStatusCode", $scope.selected.id);
+            debugMessage("$scope.candidateCustom.files" +
                 $scope.candidateCustom.files);
-            var fileIsPresent = $scope.candidateCustom.files;
+            let fileIsPresent = $scope.candidateCustom.files;
 
             if (fileIsPresent) {
 
@@ -231,7 +187,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
 
             }
 
-            var config = {
+            let config = {
                 transformRequest: angular.identity,
                 transformResponse: angular.identity,
                 headers: {
@@ -247,7 +203,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
                 // Success
                 function (response) {
                 	$scope.uploadResult = response.data;
-                    console.log(data);
+                    debugMessage(data);
                     
                     $location.path("/list-all-candidates");
                     $route.reload();
@@ -256,7 +212,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
                 // Error
                 function (response) {
                     $scope.uploadResult = response.data;
-                    console.log(response);
+                    debugMessage(response);
                     if (response.status == 500)
                         notice.database();
                     else
@@ -270,11 +226,11 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
     }
 
     $scope.validateForm = function () {
-        console.log("validateForm START");
-        console.log($scope.candidateCustom);
-        console.log($scope.selected);
-        var firstnameTmp = $scope.candidateCustom.firstname;
-//        console.log("firstnameTmp: " + firstnameTmp);
+        debugMessage("validateForm START");
+        debugMessage($scope.candidateCustom);
+        debugMessage($scope.selected);
+        let firstnameTmp = $scope.candidateCustom.firstname;
+//        debugMessage("firstnameTmp: " + firstnameTmp);
 
         if (firstnameTmp == undefined || firstnameTmp == null ||
             firstnameTmp == "") {
@@ -282,8 +238,8 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
             return false;
         }
 
-        var lastnameTmp = $scope.candidateCustom.lastname;
-//        console.log("firstnameTmp: " + lastnameTmp);
+        let lastnameTmp = $scope.candidateCustom.lastname;
+//        debugMessage("firstnameTmp: " + lastnameTmp);
 
         if (lastnameTmp == undefined || lastnameTmp == null ||
             lastnameTmp == "") {
@@ -291,74 +247,44 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
             return false;
         }
         
-        var emailTmp = $scope.candidateCustom.email;
-//        console.log("emailTmp: " + emailTmp);
+        let emailTmp = $scope.candidateCustom.email;
+//        debugMessage("emailTmp: " + emailTmp);
         if (emailTmp == undefined || emailTmp == null ||
             emailTmp == "") {
         	stringMessage = "inserisci una mail valida";
             return false;
         }
+
         
-//        var domicileCityTmp = $scope.candidateCustom.domicileCity;
-//        console.log("domicileCityTmp: " + domicileCityTmp);
-//        if (domicileCityTmp == undefined ||
-//            domicileCityTmp == null ||
-//            domicileCityTmp == "") {
-//            stringMessage = "inserisci un domicilio";
-//            return false;
-//        } 
-//        
-//      var domicileStreetNameTmp = $scope.candidateCustom.domicileStreetName;
-//      console.log("domicileStreetNameTmp: " + domicileStreetNameTmp);
-//      if (domicileStreetNameTmp == undefined ||
-//          domicileStreetNameTmp == null ||
-//          domicileStreetNameTmp == "") {
-//          stringMessage = "inserisci la via del domicilio";
-//          return false;
-//      }
-//
-//      var domicileHouseNumberTmp = $scope.candidateCustom.domicileHouseNumber;
-//      console.log("domicileHouseNumberTmp: " + domicileHouseNumberTmp);
-//      if (domicileHouseNumberTmp == undefined ||
-//          domicileHouseNumberTmp == null ||
-//          domicileHouseNumberTmp == "") {
-//          stringMessage = "inserisci il numero civico della via";
-//          return false;
-//      }
-//
-//      var studyQualificationTmp = $scope.candidateCustom.studyQualification;
-//      console.log("studyQualificationTmp: " +
-//          studyQualificationTmp);
-//      if (studyQualificationTmp == undefined ||
-//          studyQualificationTmp == null ||
-//          studyQualificationTmp == "") {
-//          stringMessage = "inserisci un titolo di studio";
-//          return false;
-//      }
-        
-        var mobileTmp = $scope.candidateCustom.mobile;
-//        console.log("mobileTmp: " + mobileTmp);
+        let mobileTmp = $scope.candidateCustom.mobile;
+//        debugMessage("mobileTmp: " + mobileTmp);
         if (mobileTmp != null) {
-            var mobileStr = mobileTmp.toString();
-            console.log("mobileTmp.length: " + mobileStr.length + " mobileStr " + mobileStr);
+            let mobileStr = mobileTmp.toString();
+            debugMessage("mobileTmp.length: " + mobileStr.length + " mobileStr " + mobileStr);
             if (mobileStr.length > 0 && mobileStr.length < 9) {
-//                console.log("mobileTmp2: " + mobileTmp);
+//                debugMessage("mobileTmp2: " + mobileTmp);
                 stringMessage = "lunghezza numero cellulare minima 9";
                 return false;
             }
         }
 
-        console.log("validateForm END --> true");
+        debugMessage("validateForm END --> true");
         return true;
     };
     
-    var myText = document.getElementById("myText");
-    var wordCount = document.getElementById("wordCount");
+    let myText = document.getElementById("myText");
+    let wordCount = document.getElementById("wordCount");
     $scope.notelengthmax = notelengthmax; 
     
     $scope.candidateCustom.note = myText.addEventListener("keyup",function(){
-    	var characters = myText.value.split('');
+    	let characters = myText.value.split('');
       wordCount.innerText = "Caratteri rimanenti: " + (notelengthmax - characters.length); 
     });
+    
+    function debugMessage (message) {
+    	if(debugEnabled){
+    	    console.log(message);	
+    	}
+    }
 
 });

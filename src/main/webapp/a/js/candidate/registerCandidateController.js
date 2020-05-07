@@ -1,4 +1,4 @@
-app.controller('registerCandidateController', function (notice, $scope, $http, $location, $route,$routeParams) {
+app.controller('registerCandidateController', function (notice, $scope, $http, $location, $route,$routeParams, $rootScope) {
 	$scope.course = $routeParams.courseCode;
     $scope.uploadResult = "";
     var stringMessage = "";
@@ -15,16 +15,16 @@ app.controller('registerCandidateController', function (notice, $scope, $http, $
 		console.log("() end");
 	});
     
-    $http({
-		method:'GET',
-		url:NoteTemplateResourceApi
-	}).then(function(response){	
-		$scope.noteTemplates=(response.data);
-//		console.log("fmoajfi "+ $scope.note)
-	},function(errResponse) {
-		console.log(errResponse.data);
-		console.log("() end");
-	});
+//    $http({
+//		method:'GET',
+//		url:NoteTemplateResourceApi
+//	}).then(function(response){	
+//		$scope.noteTemplates=(response.data);
+////		console.log("fmoajfi "+ $scope.note)
+//	},function(errResponse) {
+//		console.log(errResponse.data);
+//		console.log("() end");
+//	});
     
     $http({
 		method:'GET',
@@ -59,14 +59,14 @@ app.controller('registerCandidateController', function (notice, $scope, $http, $
         files: []
     }
 
-    var myText = document.getElementById("myText");
+//    var myText = document.getElementById("myText");
     var wordCount = document.getElementById("wordCount");
     $scope.notelengthmax = notelengthmax; 
     
-    $scope.myForm.note = myText.addEventListener("keyup",function(){
-    	var characters = myText.value.split('');
-      wordCount.innerText = "Caratteri rimanenti: " + (notelengthmax - characters.length); 
-    });    
+//    $scope.myForm.note = myText.addEventListener("keyup",function(){
+//    	var characters = myText.value.split('');
+//      wordCount.innerText = "Caratteri rimanenti: " + (notelengthmax - characters.length); 
+//    });    
     
     $scope.popolaForm = function () {
     	if (confirm("Sei sicuro di voler sovrascrivere il contenuto delle note ?")){
@@ -115,7 +115,8 @@ app.controller('registerCandidateController', function (notice, $scope, $http, $
             data.append("note", $scope.myForm.note);
             data.append("originSite", $scope.myForm.site);
 //            data.append("$scope.candidateCustom.candidateStatesId", );
-            
+            console.log($rootScope.userLogged);
+            data.append("insertedBy", $rootScope.userLogged.id);
             console.log("stillHighStudy" + $scope.myForm.stillHighStudy);
             //add by Seba 
             console.log("Seba ceck --------- origineSite: "+$scope.myForm.site);
