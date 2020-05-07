@@ -9,10 +9,10 @@ app.config(function($routeProvider) {
 		templateUrl : './template/candidate/list.html',
 		controller : 'listCandidateController'
 	}).when('/insert-new-candidate/:courseCode', {
-		templateUrl : './template/candidate/new.html',
+		templateUrl : './template/candidate/new2.html',
 		controller : 'registerCandidateController'
 	}).when('/insert-new-candidate', {
-		templateUrl : './template/candidate/new.html',
+		templateUrl : './template/candidate/new2.html',
 		controller : 'registerCandidateController'
 //	}).when('/insert-new2-candidate', {
 //		templateUrl : './template/candidate/new2.html',
@@ -238,7 +238,7 @@ app
 app.factory('AuthInterceptor', ['$rootScope', function($rootScope) {
 	return {
 		'request' : function(config) {
-			console.log("config.headers: " + config.headers + " - config.headers.Authorization: " + config.headers.Authorization);
+//			console.log("config.headers: " + config.headers + " - config.headers.Authorization: " + config.headers.Authorization);
 //			config.headers = config.headers || {};
 			if ($rootScope.username!=undefined){
 				var username = $rootScope.username ? $rootScope.username : "";
