@@ -1,4 +1,4 @@
-var app = angular.module('userregistrationsystem', [ 'ngRoute', 'ngResource' ]);
+var app = angular.module('cerepro', [ 'ngRoute', 'ngResource' ]);
 
 app.config(function($routeProvider) {
 	$routeProvider.when('/list-all-candidates', {
