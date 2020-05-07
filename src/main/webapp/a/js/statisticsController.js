@@ -7,13 +7,13 @@ var statisticsResourceApiToday = fullPath + '/surveyreply/today';
 
 var statisticsResourceApiTodaySurveyReply = fullPath + '/surveyreply/todayFilled';
 var statisticsResourceApiSevenDaysSurveyReply = fullPath + '/surveyreply/lastSevenDaysFilled';
-var statisticsResourceApiTodayUser = fullPath + '/user/todayRegistrated';
-var statisticsResourceApiSevenDaysUser = fullPath + '/user/lastSevenDaysRegistrated';
+var statisticsResourceApiTodayUser = fullPath + '/candidate/todayRegistrated';
+var statisticsResourceApiSevenDaysUser = fullPath + '/candidate/lastSevenDaysRegistrated';
 
 var statisticsResourceApiYesterdaySurveyReply = fullPath + '/surveyreply/yesterdayFilled';
 var statisticsResourceApiLastWeekSurveyReply = fullPath + '/surveyreply/lastWeekFilled';
-var statisticsResourceApiYesterdayUser = fullPath + '/user/yesterdayRegistrated';
-var statisticsResourceApiLastWeekUser = fullPath + '/user/lastWeekRegistrated';
+var statisticsResourceApiYesterdayUser = fullPath + '/candidate/yesterdayRegistrated';
+var statisticsResourceApiLastWeekUser = fullPath + '/candidate/lastWeekRegistrated';
 
 var statisticsResourceApiCoursePageList = fullPath + '/coursepage/';
 var statisticsResourceApiSurveyList = fullPath + '/survey/';
