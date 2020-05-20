@@ -37,7 +37,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
     function initializeSelectedStatusCode () {
     	if (($scope.candidateCustom.candidateStatusCode!=undefined)&&($scope.candidateCustom.candidateStatusCode!=null)) {
     		for (let i=0; i<$scope.states.length;i++) {
-    			if ($scope.candidateCustom.candidateStatusCode==$scope.states[i].id){
+    			if ($scope.candidateCustom.candidateStatusCode==$scope.states[i].statusCode){
     				$scope.selected = $scope.states[i];	
     			}
     		}
@@ -150,7 +150,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
 //            debugMessage(JSON.stringify($scope.selected));
 //            debugMessage("currentStateSelected: " + currentStateSelected);
             //debugMessage("currentStateSelected.id: "+ currentStateSelected.id);
-            data.append("candidateStatusCode", $scope.selected.id);
+            data.append("candidateStatusCode", $scope.selected.statusCode);
             debugMessage("$scope.candidateCustom.files" +
                 $scope.candidateCustom.files);
             let fileIsPresent = $scope.candidateCustom.files;

@@ -111,7 +111,7 @@
                         <div class="form-group col-md-12">
                         <label class="col-md-2 control-lable" for="candidateStatesId" readonly>Stato della candidatura:</label>
                         	<div class="col-md-7">
-								<select ng-options="current as current.statusLabel for current in states track by current.id" ng-model="selected" style="background-color:{{selected.statusColor}}"></select>
+								<select ng-options="current as current.statusLabel for current in states track by current.statusCode" ng-model="selected" style="background-color:{{selected.statusColor}}"></select>
                         	</div>
                         </div>
                     <hr>
