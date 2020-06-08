@@ -74,7 +74,7 @@ app.controller('detailCandidateController', function (notice, $scope, $http, $lo
         debugMessage("oldCVPath " + oldCVPath);
         if ($scope.validateForm()) {
             let data = new FormData();
-
+            data.append("positionCode", $scope.candidateCustom.courseCode);
             data.append("domicileCity",
                 $scope.candidateCustom.domicileCity);
             data.append("studyQualification",
